@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { snowflakeRegex } from '../utils/validate.js';
+import { snowflakeRegex, isAfterGuildCreation } from '../utils/validate.js';
 
 function defineLogEntry(sequelize) {
     class LogEntry extends Model {
@@ -21,9 +21,12 @@ function defineLogEntry(sequelize) {
                 is: snowflakeRegex,
             },
         },
-        createdAt: { // validate this
+        created: {
             type: DataTypes.DATE,
             allowNull: false,
+            validate: {
+                isAfterGuildCreation,
+            },
         },
         type: { // should this be an enum? verify: create, verify, kick, ban, maybe mod: ban, whatever
             type: DataTypes.INTEGER,

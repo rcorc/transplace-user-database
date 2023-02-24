@@ -2,8 +2,10 @@
   "name": "transplace-user-database",
   "version": "0.0.0",
   "description": "Database for TransPlace",
-  "main": "index.js",
+  "main": "./src/app.js",
   "scripts": {
+    "start": "node ./src/app.js",
+    "devstart": "nodemon ./src/app.js",
     "seed": "node ./src/db/seeders/testSeed.js"
   },
   "type": "module",
@@ -11,13 +13,16 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "pg": "^8.8.0",
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0",
+    "pg": "^8.9.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.25.3"
+    "sequelize": "^6.28.2"
   },
   "devDependencies": {
-    "eslint": "^8.26.0",
+    "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-plugin-import": "^2.27.5",
+    "nodemon": "^2.0.20"
   }
 }

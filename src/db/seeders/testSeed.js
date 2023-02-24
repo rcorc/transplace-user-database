@@ -1,9 +1,10 @@
-import sequelize from '../models/index.js';
+import db from '../index.js';
 
+const { sequelize } = db;
 await sequelize.sync({ force: true });
 // await sequelize.sync();
 
-const hecate = sequelize.Member.build({
+const hecate = db.Member.build({
     userId: '12345678901234567',
     username: 'HecatesRevenge',
     discriminator: 1234,
@@ -12,7 +13,7 @@ const hecate = sequelize.Member.build({
     joinedAt: new Date(),
 });
 
-const elise = sequelize.Member.build({
+const elise = db.Member.build({
     userId: '111222333444555666',
 
     username: '꧁e̶̛͆l̴̓́ 123 456',
@@ -23,7 +24,7 @@ const elise = sequelize.Member.build({
     joinedAt: new Date(),
 });
 
-const jester = sequelize.Member.build({
+const jester = db.Member.build({
     userId: '8765432109876543210',
     username: 'jester hearts',
     discriminator: '5678',
@@ -36,21 +37,35 @@ await hecate.save();
 await elise.save();
 await jester.save();
 
-const hecateTicket = sequelize.VerifyTicket.build({
+const hecateTicket = db.VerifyTicket.build({
     channelId: '21345678901234567',
     applicantId: '12345678901234567',
     createdTimestamp: new Date(),
 });
+const jesterTicket = db.VerifyTicket.build({
+    channelId: '32145678901234567',
+    applicantId: '8765432109876543210',
+    createdTimestamp: new Date(),
+});
 
 await hecateTicket.save();
+await jesterTicket.save();
 
-const hecateLog = sequelize.LogEntry.build({
-    createdAt: new Date(),
+const hecateLog = db.LogEntry.build({
+    created: new Date(),
     type: 1,
-    creatorId: '8765432109876543210',
+    creatorId: '111222333444555666',
     verifyTicket: '21345678901234567',
 });
 
+const jesterLog = db.LogEntry.build({
+    created: new Date(),
+    type: 2,
+    creatorId: '111222333444555666',
+    verifyTicket: '32145678901234567',
+});
+
 await hecateLog.save();
+await jesterLog.save();
 
 await sequelize.close();
